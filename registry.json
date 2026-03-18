@@ -9,9 +9,8 @@
       "version": "2.4.0",
       "license": "AGPL-3.0",
       "source": {
-        "type": "github",
-        "url": "https://github.com/Lucasdoreac/DNP",
-        "path": "services/ludoc-os"
+        "type": "local",
+        "note": "Proprietary — not yet public. Install via DNP monorepo."
       },
       "install": {
         "type": "stdio",

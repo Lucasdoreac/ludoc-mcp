@@ -20,7 +20,7 @@ irm https://raw.githubusercontent.com/Lucasdoreac/ludoc-mcp/main/install-to-vs20
 
 | Server | Description | Source |
 |--------|-------------|--------|
-| **ludoc-context** | Unified context server — knowledge graph, journal, constitution, multi-agent coordination | [DNP/ludoc-os](https://github.com/Lucasdoreac/DNP) |
+| **ludoc-context** | Unified context server — knowledge graph, journal, constitution, multi-agent coordination | Proprietary (DNP monorepo — coming soon) |
 | **repomix** | Pack entire codebase into AI-friendly context | [yamadashy/repomix](https://github.com/yamadashy/repomix) |
 | **context7** | Up-to-date library docs injected into prompts | [upstash/context7](https://github.com/upstash/context7) |
 | **sequential-thinking** | Dynamic problem solving through thought chains | [modelcontextprotocol/servers](https://github.com/modelcontextprotocol/servers) |
