@@ -1,0 +1,112 @@
+{
+  "$schema": "https://registry.modelcontextprotocol.io/schema/v1",
+  "namespace": "ludoc",
+  "version": "1.0.0",
+  "servers": [
+    {
+      "name": "ludoc-context",
+      "description": "Ludoc unified context server — knowledge graph, journal, constitution injection, multi-agent coordination, and proxy aggregator for 50+ tools",
+      "version": "2.4.0",
+      "license": "AGPL-3.0",
+      "source": {
+        "type": "github",
+        "url": "https://github.com/Lucasdoreac/DNP",
+        "path": "services/ludoc-os"
+      },
+      "install": {
+        "type": "stdio",
+        "command": "bun",
+        "args": ["run", "src/api/mcp-server.ts"],
+        "env": {
+          "LUDOC_SERVER_URL": "http://localhost:9000"
+        }
+      },
+      "tags": ["knowledge-graph", "multi-agent", "context", "coordinator", "proxy"]
+    },
+    {
+      "name": "repomix",
+      "description": "Pack entire codebase into AI-friendly single-file context",
+      "source": {
+        "type": "github",
+        "url": "https://github.com/yamadashy/repomix"
+      },
+      "install": {
+        "type": "stdio",
+        "command": "bunx",
+        "args": ["repomix", "--mcp"]
+      },
+      "tags": ["codebase", "context", "analysis"]
+    },
+    {
+      "name": "context7",
+      "description": "Up-to-date library and framework documentation injected into agent context",
+      "source": {
+        "type": "github",
+        "url": "https://github.com/upstash/context7"
+      },
+      "install": {
+        "type": "stdio",
+        "command": "bunx",
+        "args": ["-y", "@upstash/context7-mcp@latest"]
+      },
+      "tags": ["docs", "libraries", "context"]
+    },
+    {
+      "name": "sequential-thinking",
+      "description": "Dynamic problem-solving through structured thought chains",
+      "source": {
+        "type": "github",
+        "url": "https://github.com/modelcontextprotocol/servers",
+        "path": "src/sequentialthinking"
+      },
+      "install": {
+        "type": "stdio",
+        "command": "bunx",
+        "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
+      },
+      "tags": ["reasoning", "planning"]
+    },
+    {
+      "name": "browser-tools",
+      "description": "Browser automation, console capture, network inspection, and screenshot capture",
+      "source": {
+        "type": "github",
+        "url": "https://github.com/AgentDeskAI/browser-tools-mcp"
+      },
+      "install": {
+        "type": "stdio",
+        "command": "bunx",
+        "args": ["@agentdeskai/browser-tools-mcp@latest"]
+      },
+      "tags": ["browser", "automation", "debugging"]
+    },
+    {
+      "name": "semgrep",
+      "description": "Static analysis, security scanning, and code quality checks",
+      "source": {
+        "type": "github",
+        "url": "https://github.com/semgrep/semgrep"
+      },
+      "install": {
+        "type": "stdio",
+        "command": "uvx",
+        "args": ["semgrep-mcp"]
+      },
+      "tags": ["security", "static-analysis", "linting"]
+    },
+    {
+      "name": "ast-grep",
+      "description": "Structural code search and transformation using AST patterns",
+      "source": {
+        "type": "github",
+        "url": "https://github.com/ast-grep/ast-grep-mcp"
+      },
+      "install": {
+        "type": "stdio",
+        "command": "uvx",
+        "args": ["ast-grep-mcp"]
+      },
+      "tags": ["ast", "refactoring", "search"]
+    }
+  ]
+}

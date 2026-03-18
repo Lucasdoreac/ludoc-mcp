@@ -1,0 +1,42 @@
+{
+  "servers": {
+    "ludoc-context": {
+      "type": "stdio",
+      "command": "C:\\Users\\ludoc\\.bun\\bin\\bun.exe",
+      "args": ["run", "C:\\Users\\ludoc\\DNP\\services\\ludoc-os\\src\\api\\mcp-server.ts"],
+      "env": {
+        "LUDOC_SERVER_URL": "http://localhost:9000"
+      }
+    },
+    "repomix": {
+      "type": "stdio",
+      "command": "C:\\Users\\ludoc\\.bun\\bin\\bunx.exe",
+      "args": ["repomix", "--mcp"]
+    },
+    "context7": {
+      "type": "stdio",
+      "command": "C:\\Users\\ludoc\\.bun\\bin\\bunx.exe",
+      "args": ["-y", "@upstash/context7-mcp@latest"]
+    },
+    "sequential-thinking": {
+      "type": "stdio",
+      "command": "C:\\Users\\ludoc\\.bun\\bin\\bunx.exe",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
+    },
+    "browser-tools": {
+      "type": "stdio",
+      "command": "C:\\Users\\ludoc\\.bun\\bin\\bunx.exe",
+      "args": ["@agentdeskai/browser-tools-mcp@latest"]
+    },
+    "semgrep": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["semgrep-mcp"]
+    },
+    "ast-grep": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["ast-grep-mcp"]
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "_comment": "Add this mcpServers block to your Claude Code settings.json",
+  "mcpServers": {
+    "ludoc-os": {
+      "command": "C:\\Users\\ludoc\\.bun\\bin\\bun.exe",
+      "args": ["run", "C:\\Users\\ludoc\\DNP\\services\\ludoc-os\\src\\api\\mcp-server.ts"],
+      "env": {
+        "LUDOC_SERVER_URL": "http://localhost:9000"
+      }
+    },
+    "repomix": {
+      "command": "C:\\Users\\ludoc\\.bun\\bin\\bunx.exe",
+      "args": ["repomix", "--mcp"]
+    },
+    "context7": {
+      "command": "C:\\Users\\ludoc\\.bun\\bin\\bunx.exe",
+      "args": ["-y", "@upstash/context7-mcp@latest"]
+    },
+    "sequential-thinking": {
+      "command": "C:\\Users\\ludoc\\.bun\\bin\\bunx.exe",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
+    },
+    "browser": {
+      "command": "C:\\Users\\ludoc\\.bun\\bin\\bunx.exe",
+      "args": ["@agentdeskai/browser-tools-mcp@latest"]
+    },
+    "semgrep": {
+      "command": "uvx",
+      "args": ["semgrep-mcp"]
+    },
+    "ast-grep": {
+      "command": "uvx",
+      "args": ["ast-grep-mcp"]
+    }
+  }
+}
