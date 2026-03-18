@@ -1,5 +1,5 @@
 {
-  "_info": "MauiDevTools — config para VS 2022/2026. Copie para ~/.mcp.json ou use install-to-vs.ps1",
+  "_info": "MauiDevTools — config para Visual Studio 2022/2026. Copie para ~/.mcp.json",
   "servers": {
     "repomix": {
       "type": "stdio",

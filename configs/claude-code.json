@@ -1,27 +1,20 @@
 {
-  "_comment": "Add this mcpServers block to your Claude Code settings.json",
+  "_info": "MauiDevTools — adicione este bloco mcpServers ao ~/.claude/settings.json ou use install-to-claude.sh",
   "mcpServers": {
-    "ludoc-os": {
-      "command": "C:\\Users\\ludoc\\.bun\\bin\\bun.exe",
-      "args": ["run", "C:\\Users\\ludoc\\DNP\\services\\ludoc-os\\src\\api\\mcp-server.ts"],
-      "env": {
-        "LUDOC_SERVER_URL": "http://localhost:9000"
-      }
-    },
     "repomix": {
-      "command": "C:\\Users\\ludoc\\.bun\\bin\\bunx.exe",
+      "command": "bunx",
       "args": ["repomix", "--mcp"]
     },
     "context7": {
-      "command": "C:\\Users\\ludoc\\.bun\\bin\\bunx.exe",
+      "command": "bunx",
       "args": ["-y", "@upstash/context7-mcp@latest"]
     },
     "sequential-thinking": {
-      "command": "C:\\Users\\ludoc\\.bun\\bin\\bunx.exe",
+      "command": "bunx",
       "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
     },
-    "browser": {
-      "command": "C:\\Users\\ludoc\\.bun\\bin\\bunx.exe",
+    "browser-tools": {
+      "command": "bunx",
       "args": ["@agentdeskai/browser-tools-mcp@latest"]
     },
     "semgrep": {
@@ -30,7 +23,7 @@
     },
     "ast-grep": {
       "command": "uvx",
-      "args": ["ast-grep-mcp"]
+      "args": ["--from", "git+https://github.com/ast-grep/ast-grep-mcp", "ast-grep-server"]
     }
   }
 }

@@ -1,64 +1,116 @@
-# Ludoc MCP Marketplace
+# 🛠️ MauiDevTools
 
-> Curated MCP servers for **Claude Code**, **VS 2026 GitHub Copilot**, and **Gemini CLI** — maintained by [@Lucasdoreac](https://github.com/Lucasdoreac).
+> Coleção de servidores MCP (_Model Context Protocol_) para turbinar o desenvolvimento **.NET MAUI** com ferramentas de IA.
+> Configurado para **Claude Code**, **VS 2022/2026** e **Gemini CLI**.
 
-## Quick Install
+---
+
+## O que é MCP?
+
+MCP é o protocolo que permite ao seu assistente de IA (Claude, Copilot, Gemini) usar ferramentas externas durante uma conversa — como pesquisar documentação, analisar código, navegar no browser, etc.
+
+Com este pack configurado, você digita uma pergunta e o assistente já tem acesso a todas essas ferramentas automaticamente.
+
+---
+
+## Ferramentas incluídas
+
+| Ferramenta | O que faz |
+|------------|-----------|
+| **repomix** | Empacota o projeto inteiro em um único contexto para o AI analisar |
+| **context7** | Busca documentação atualizada de .NET, MAUI, NuGet e outras libs |
+| **sequential-thinking** | Resolve problemas complexos em cadeia de raciocínio estruturado |
+| **browser-tools** | Inspeciona o browser, captura screenshots, lê console de erros |
+| **semgrep** | Análise estática de código — encontra bugs e problemas de segurança |
+| **ast-grep** | Busca estrutural no código (por padrões de sintaxe, não só texto) |
+
+---
+
+## Instalação
+
+### Pré-requisitos
+
+```bash
+# Bun (gerenciador de pacotes JS — mais rápido que npm)
+winget install Oven-sh.Bun
+
+# uv (gerenciador Python — necessário para semgrep e ast-grep)
+winget install astral-sh.uv
+```
 
 ### Claude Code
+
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/Lucasdoreac/ludoc-mcp/main/install-to-claude.sh)
+git clone https://github.com/Lucasdoreac/mauidevtools
+cd mauidevtools
+bash install-to-claude.sh
 ```
 
-### VS 2026 (Windows)
+Reinicie o Claude Code depois.
+
+### VS 2022 / VS 2026 (GitHub Copilot Chat)
+
 ```powershell
-irm https://raw.githubusercontent.com/Lucasdoreac/ludoc-mcp/main/install-to-vs2026.ps1 | iex
+git clone https://github.com/Lucasdoreac/mauidevtools
+cd mauidevtools
+.\install-to-vs.ps1
+```
+
+Reinicie o Visual Studio depois.
+
+### Manual (copiar e colar)
+
+Copie o conteúdo de `configs/claude-code.json` para o seu `~/.claude/settings.json` (bloco `mcpServers`).
+Para VS, copie `configs/vs.json` para `~/.mcp.json`.
+
+---
+
+## Como usar no Claude Code
+
+Depois de instalar, experimente no Claude:
+
+```
+"Analisa o projeto inteiro e explica a arquitetura"
+→ usa repomix automaticamente
+
+"Como funciona NavigationPage no .NET MAUI?"
+→ usa context7 para buscar a doc oficial atualizada
+
+"Tem algum bug de segurança neste ViewModel?"
+→ usa semgrep para análise estática
+
+"Tira um screenshot do app rodando e analisa a UI"
+→ usa browser-tools
 ```
 
 ---
 
-## Included Servers
-
-| Server | Description | Source |
-|--------|-------------|--------|
-| **ludoc-context** | Unified context server — knowledge graph, journal, constitution, multi-agent coordination | Proprietary (DNP monorepo — coming soon) |
-| **repomix** | Pack entire codebase into AI-friendly context | [yamadashy/repomix](https://github.com/yamadashy/repomix) |
-| **context7** | Up-to-date library docs injected into prompts | [upstash/context7](https://github.com/upstash/context7) |
-| **sequential-thinking** | Dynamic problem solving through thought chains | [modelcontextprotocol/servers](https://github.com/modelcontextprotocol/servers) |
-| **browser-tools** | Browser automation and debugging | [AgentDeskAI/browser-tools-mcp](https://github.com/AgentDeskAI/browser-tools-mcp) |
-| **semgrep** | Static analysis and security scanning | [semgrep/semgrep](https://github.com/semgrep/semgrep) |
-| **ast-grep** | Structural code search and transformation | [ast-grep/ast-grep-mcp](https://github.com/ast-grep/ast-grep-mcp) |
-
----
-
-## Super Context Server
-
-The `ludoc-context` server acts as a **proxy aggregator** — connecting to the above servers internally and exposing all their tools under a single MCP endpoint.
+## Estrutura do repositório
 
 ```
-Your Agent (Claude / Copilot / Gemini)
-    ↓ 1 connection
-ludoc-context (Super Server)
-    ├── Native tools (19): constitution, knowledge graph, journal, coordinator...
-    ├── repomix__pack_codebase
-    ├── ctx7__resolve-library-docs
-    ├── think__sequentialthinking
-    └── ... (50+ tools unified)
+mauidevtools/
+├── README.md                  # este arquivo
+├── registry.json              # catálogo oficial MCP
+├── configs/
+│   ├── claude-code.json       # config para Claude Code
+│   └── vs.json                # config para VS 2022/2026
+├── install-to-claude.sh       # instalador automático (Claude Code)
+├── install-to-vs.ps1          # instalador automático (Visual Studio)
+├── servers/                   # submodules dos projetos open-source
+│   ├── repomix/
+│   ├── context7/
+│   └── browser-tools/
+└── docs/
+    ├── claude-code.md         # guia detalhado Claude Code
+    └── visual-studio.md       # guia detalhado Visual Studio
 ```
 
 ---
 
-## Files
+## Suporte
 
-- `registry.json` — Official MCP registry format
-- `.mcp.json` — Ready-to-use VS 2026 config
-- `configs/claude-code.json` — Claude Code `mcpServers` block
-- `configs/vs2026-dotnet.json` — .NET MAUI optimized config
-- `install-to-vs2026.ps1` — Windows installer (merges into `~/.mcp.json`)
-- `install-to-claude.sh` — Claude Code installer
-- `docs/` — Per-client installation guides
+Abra uma [issue](https://github.com/Lucasdoreac/mauidevtools/issues) ou fale com o professor.
 
 ---
 
-## License
-
-AGPL-3.0 — see [LICENSE](LICENSE)
+Feito para a disciplina de **Programação para Dispositivos Móveis — .NET MAUI**

@@ -1,57 +1,64 @@
 #!/usr/bin/env bash
 # install-to-claude.sh
-# Ludoc MCP Marketplace — Claude Code installer
-# Adds ludoc MCP servers to Claude Code settings.json
+# MauiDevTools — Instalador para Claude Code
+# Adiciona os servidores MCP ao ~/.claude/settings.json
 
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SETTINGS_FILE="$HOME/.claude/settings.json"
+SETTINGS="$HOME/.claude/settings.json"
 
-echo "=== Ludoc MCP Marketplace — Claude Code Installer ==="
+echo ""
+echo "=== MauiDevTools — Instalador Claude Code ==="
 echo ""
 
-if [ ! -f "$SETTINGS_FILE" ]; then
-    echo "Creating $SETTINGS_FILE..."
-    echo '{"mcpServers":{}}' > "$SETTINGS_FILE"
+# Verificar pré-requisitos
+missing=()
+command -v bunx &>/dev/null || missing+=("bun  → https://bun.sh")
+command -v uvx  &>/dev/null || missing+=("uv   → https://docs.astral.sh/uv/")
+
+if [ ${#missing[@]} -gt 0 ]; then
+  echo "⚠  Pré-requisitos ausentes:"
+  for dep in "${missing[@]}"; do echo "   - $dep"; done
+  echo ""
+  echo "Instale os itens acima e rode este script novamente."
+  exit 1
 fi
 
-# Use node/bun to merge JSON safely
-if command -v bun &>/dev/null; then
-    RUNTIME="bun"
-elif command -v node &>/dev/null; then
-    RUNTIME="node"
-else
-    echo "ERROR: bun or node required"
-    exit 1
+# Criar settings.json se não existir
+if [ ! -f "$SETTINGS" ]; then
+  mkdir -p "$(dirname "$SETTINGS")"
+  echo '{"mcpServers":{}}' > "$SETTINGS"
 fi
 
-$RUNTIME - <<'MERGE_SCRIPT'
+# Merge via node/bun
+if command -v bun &>/dev/null; then RT="bun"; else RT="node"; fi
+
+SCRIPT_DIR="$SCRIPT_DIR" $RT --input-type=module <<'EOF'
 import { readFileSync, writeFileSync } from 'fs';
-import { join } from 'path';
 
 const settingsPath = process.env.HOME + '/.claude/settings.json';
 const newConfigPath = process.env.SCRIPT_DIR + '/configs/claude-code.json';
 
 const settings = JSON.parse(readFileSync(settingsPath, 'utf8'));
-const newConfig = JSON.parse(readFileSync(newConfigPath, 'utf8'));
+const { mcpServers: newServers } = JSON.parse(readFileSync(newConfigPath, 'utf8'));
 
 if (!settings.mcpServers) settings.mcpServers = {};
 
 let added = 0, skipped = 0;
-for (const [name, server] of Object.entries(newConfig.mcpServers)) {
-    if (settings.mcpServers[name]) {
-        console.log(`  SKIP (exists): ${name}`);
-        skipped++;
-    } else {
-        settings.mcpServers[name] = server;
-        console.log(`  ADD: ${name}`);
-        added++;
-    }
+for (const [name, server] of Object.entries(newServers)) {
+  if (settings.mcpServers[name]) {
+    console.log(`  SKIP (já existe): ${name}`);
+    skipped++;
+  } else {
+    settings.mcpServers[name] = server;
+    console.log(`  ADD: ${name}`);
+    added++;
+  }
 }
 
 writeFileSync(settingsPath, JSON.stringify(settings, null, 2));
-console.log(`\nSummary: ${added} added, ${skipped} skipped.`);
-console.log(`Written to: ${settingsPath}`);
-console.log('Restart Claude Code to apply changes.');
-MERGE_SCRIPT
+console.log(`\nResultado: ${added} adicionados, ${skipped} já existiam.`);
+console.log(`✅ Salvo em: ${settingsPath}`);
+console.log('   Reinicie o Claude Code para aplicar.');
+EOF
