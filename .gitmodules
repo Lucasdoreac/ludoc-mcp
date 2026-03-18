@@ -1,0 +1,9 @@
+[submodule "servers/repomix"]
+	path = servers/repomix
+	url = https://github.com/yamadashy/repomix
+[submodule "servers/context7"]
+	path = servers/context7
+	url = https://github.com/upstash/context7
+[submodule "servers/browser-tools"]
+	path = servers/browser-tools
+	url = https://github.com/AgentDeskAI/browser-tools-mcp
