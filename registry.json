@@ -48,18 +48,30 @@
       "tags": ["reasoning", "planning"]
     },
     {
-      "name": "browser-tools",
-      "description": "Automação de browser, captura de screenshots, leitura de console e network",
+      "name": "microsoft-learn",
+      "description": "Documentação oficial .NET / MAUI / XAML direto do Microsoft Learn",
       "source": {
-        "type": "github",
-        "url": "https://github.com/AgentDeskAI/browser-tools-mcp"
+        "type": "http",
+        "url": "https://learn.microsoft.com/api/mcp"
+      },
+      "install": {
+        "type": "http",
+        "url": "https://learn.microsoft.com/api/mcp"
+      },
+      "tags": ["docs", "dotnet", "maui", "xaml", "microsoft"]
+    },
+    {
+      "name": "nuget",
+      "description": "Busca pacotes NuGet com tipos e interfaces reais — evita alucinação de APIs",
+      "source": {
+        "type": "dotnet-tool",
+        "package": "DimonSmart.NugetMcpServer"
       },
       "install": {
         "type": "stdio",
-        "command": "bunx",
-        "args": ["@agentdeskai/browser-tools-mcp@latest"]
+        "command": "DimonSmart.NugetMcpServer"
       },
-      "tags": ["browser", "debug", "ui"]
+      "tags": ["nuget", "dotnet", "packages"]
     },
     {
       "name": "semgrep",

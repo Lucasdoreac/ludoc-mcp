@@ -16,10 +16,13 @@
       "command": "bunx",
       "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
     },
-    "browser-tools": {
+    "microsoft-learn": {
+      "type": "http",
+      "url": "https://learn.microsoft.com/api/mcp"
+    },
+    "nuget": {
       "type": "stdio",
-      "command": "bunx",
-      "args": ["@agentdeskai/browser-tools-mcp@latest"]
+      "command": "DimonSmart.NugetMcpServer"
     },
     "semgrep": {
       "type": "stdio",

@@ -14,8 +14,9 @@ echo ""
 
 # Verificar pré-requisitos
 missing=()
-command -v bunx &>/dev/null || missing+=("bun  → https://bun.sh")
-command -v uvx  &>/dev/null || missing+=("uv   → https://docs.astral.sh/uv/")
+command -v bunx   &>/dev/null || missing+=("bun     → https://bun.sh")
+command -v uvx    &>/dev/null || missing+=("uv      → https://docs.astral.sh/uv/")
+command -v dotnet &>/dev/null || missing+=("dotnet  → https://dotnet.microsoft.com/download")
 
 if [ ${#missing[@]} -gt 0 ]; then
   echo "⚠  Pré-requisitos ausentes:"
@@ -62,3 +63,10 @@ console.log(`\nResultado: ${added} adicionados, ${skipped} já existiam.`);
 console.log(`✅ Salvo em: ${settingsPath}`);
 console.log('   Reinicie o Claude Code para aplicar.');
 EOF
+
+# Instalar NuGet MCP tool se necessário
+if ! dotnet tool list -g 2>/dev/null | grep -q "dimonsmart.nugetmcpserver"; then
+  echo ""
+  echo "📦 Instalando DimonSmart.NugetMcpServer (dotnet global tool)..."
+  dotnet tool install -g DimonSmart.NugetMcpServer
+fi

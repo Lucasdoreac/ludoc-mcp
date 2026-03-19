@@ -15,8 +15,9 @@ Write-Host ""
 
 # Verificar pré-requisitos
 $missingDeps = @()
-if (-not (Get-Command "bunx" -ErrorAction SilentlyContinue)) { $missingDeps += "bun (winget install Oven-sh.Bun)" }
-if (-not (Get-Command "uvx"  -ErrorAction SilentlyContinue)) { $missingDeps += "uv  (winget install astral-sh.uv)" }
+if (-not (Get-Command "bunx"   -ErrorAction SilentlyContinue)) { $missingDeps += "bun    (winget install Oven-sh.Bun)" }
+if (-not (Get-Command "uvx"    -ErrorAction SilentlyContinue)) { $missingDeps += "uv     (winget install astral-sh.uv)" }
+if (-not (Get-Command "dotnet" -ErrorAction SilentlyContinue)) { $missingDeps += "dotnet (https://dotnet.microsoft.com/download)" }
 
 if ($missingDeps.Count -gt 0) {
     Write-Host "⚠  Pré-requisitos ausentes:" -ForegroundColor Yellow
@@ -56,6 +57,14 @@ foreach ($prop in $newServers.PSObject.Properties) {
 
 Write-Host ""
 Write-Host "Resultado: $added adicionados, $skipped já existiam."
+
+# Instalar NuGet MCP tool se necessário
+$nugetTool = dotnet tool list -g 2>$null | Select-String "dimonsmart.nugetmcpserver"
+if (-not $nugetTool) {
+    Write-Host ""
+    Write-Host "📦 Instalando DimonSmart.NugetMcpServer (dotnet global tool)..." -ForegroundColor Cyan
+    dotnet tool install -g DimonSmart.NugetMcpServer
+}
 
 if ($DryRun) {
     Write-Host "[DRY RUN] Não foi salvo. Conteúdo que seria gravado:" -ForegroundColor Yellow
