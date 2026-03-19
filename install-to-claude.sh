@@ -67,6 +67,6 @@ EOF
 # Instalar NuGet MCP tool se necessário
 if ! dotnet tool list -g 2>/dev/null | grep -q "dimonsmart.nugetmcpserver"; then
   echo ""
-  echo "📦 Instalando DimonSmart.NugetMcpServer (dotnet global tool)..."
-  dotnet tool install -g DimonSmart.NugetMcpServer
+  echo "📦 Instalando NugetMcpServer (dotnet global tool)..."
+  dotnet tool install -g NugetMcpServer
 fi

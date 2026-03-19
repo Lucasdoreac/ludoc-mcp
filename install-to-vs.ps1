@@ -62,8 +62,8 @@ Write-Host "Resultado: $added adicionados, $skipped já existiam."
 $nugetTool = dotnet tool list -g 2>$null | Select-String "dimonsmart.nugetmcpserver"
 if (-not $nugetTool) {
     Write-Host ""
-    Write-Host "📦 Instalando DimonSmart.NugetMcpServer (dotnet global tool)..." -ForegroundColor Cyan
-    dotnet tool install -g DimonSmart.NugetMcpServer
+    Write-Host "📦 Instalando NugetMcpServer (dotnet global tool)..." -ForegroundColor Cyan
+    dotnet tool install -g NugetMcpServer
 }
 
 if ($DryRun) {

@@ -22,7 +22,7 @@
     },
     "nuget": {
       "type": "stdio",
-      "command": "DimonSmart.NugetMcpServer"
+      "command": "NugetMcpServer"
     },
     "semgrep": {
       "type": "stdio",

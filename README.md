@@ -42,6 +42,7 @@ winget install astral-sh.uv
 # Baixe em https://dotnet.microsoft.com/download
 # Após instalar o .NET, instale o server NuGet:
 dotnet tool install -g DimonSmart.NugetMcpServer
+# (o comando executável instalado é: NugetMcpServer)
 ```
 
 ### Claude Code
